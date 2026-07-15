@@ -1,0 +1,136 @@
+# Projects
+/inbox/*
+!/inbox/.gitkeep
+
+# temp
+/temp/*
+!/temp/.gitkeep
+
+# Obsidian
+## configs and cache
+/.obsidian/workspace.json
+/.obsidian/workspace-mobile.json
+/.obsidian/graph.json
+/.obsidian/cache/
+/.trash
+## plugins
+/Excalidraw
+/Clippings
+
+### Agents
+.antigravitycli/
+.opencode/
+.claude/
+
+# OS
+*.tmp
+*.swp
+*.swo
+.cache
+.DS_Store
+Thumbs.db
+.thumbnails
+
+### Logs
+*.log
+logs/
+
+# Clouds
+.stfolder/
+.stversions/
+.stignore
+.syncthing.*.tmp
+~syncthing~*.tmp
+*sync-conflict*
+*conflicted*
+
+### IDEs
+.idea*/
+.vscode*/
+
+### Environments
+.env
+.env.*
+!.env.example
+
+######## Python #######
+
+# ruff
+.ruff_cache/
+
+# Virtual Environments
+venv*
+.venv*
+env/
+ENV/
+
+# PyPI configuration file
+.pypirc
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build*/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+*.lcov
+.hypothesis/
+.pytest_cache/
+cover/
+
+######## Node.js #######
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Generated files
+.docusaurus
+.cache-loader
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo

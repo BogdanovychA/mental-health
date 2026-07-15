@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Bogdanovych"
+    given-names: "Andrii"
+    orcid: "https://orcid.org/0009-0006-9045-5675"
+title: "Mental Health"
+abstract: "A personal mental health database designed to ingest, structure, index, and organize mental health records and source materials."
+repository-code: "https://github.com/BogdanovychA/mental-health"
+license: MIT
+doi:
+version: 0.1.0
+date-released:

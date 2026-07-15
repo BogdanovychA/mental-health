@@ -1,0 +1,22 @@
+[project]
+name = "mental-health"
+version = "0.1.0"
+description = "A personal mental health database for structuring, indexing, and organizing mental health records and source materials."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+[dependency-groups]
+dev = [
+    "pre_commit",
+    "ruff",
+]
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "preserve"
