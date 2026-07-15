@@ -8,7 +8,7 @@
 
 | Звіт | Період | Баланс балів | Висновок |
 | :--- | :--- | :--- | :--- |
-| [YYYY/MM/DD-file-name](./reports/YYYY/MM/DD-file-name.md) | `YYYY-MM-DD` — `YYYY-MM-DD` | +/-N | `Короткий опис-висновок` |
+| [YYYY/MM/DD-PREFIX-report-X](./reports/YYYY/MM/DD-PREFIX-report-X.md) | `YYYY-MM-DD` — `YYYY-MM-DD` | +/-N | `Короткий опис-висновок` |
 
 
 ---
@@ -17,4 +17,4 @@
 
 | Джерело | Дата джерела | Баланс балів |
 | :--- | :--- | :--- |
-| [YYYY/MM/DD-file-name](./raw/YYYY/MM/DD-file-name.md) | YYYY-MM-DD | +/-M |
+| [YYYY/MM/DD-inbox-X](./raw/YYYY/MM/DD-inbox-X.md) | YYYY-MM-DD | +/-M |

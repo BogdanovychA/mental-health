@@ -37,4 +37,4 @@
 
 | Джерело | Дата | Баланс |
 | :--- | :--- | :--- |
-| [YYYY/MM/DD-file-name](../../../raw/YYYY/MM/DD-file-name.md) | YYYY-MM-DD | +/-M |
+| [YYYY/MM/DD-inbox-X](../../../raw/YYYY/MM/DD-inbox-X.md) | YYYY-MM-DD | +/-M |
