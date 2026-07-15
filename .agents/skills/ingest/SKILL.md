@@ -60,6 +60,6 @@ metadata:
 
    ## YYYY-MM-DD ingest | Додано: обробка нових вхідних записів за <День Місяць словом або DD-MM-YYYY>
    - Додано джерело: [YYYY/MM/DD-inbox-X](./raw/YYYY/MM/DD-inbox-X.md)
-   - Оновлено: [index.md](index.md)
+   - Оновлено: [index](index.md)
    ```
    - Де `YYYY-MM-DD` у заголовку — це поточна дата виконання операції.

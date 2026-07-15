@@ -62,7 +62,7 @@ metadata:
 2. Створити та зробити перший запис у журналі активності `data/log.md` на базі шаблону [templates/log.md](../../../templates/log.md):
    ```markdown
    ## YYYY-MM-DD update | Оновлено: ініціалізовано базу даних та створено профіль користувача <Ім'я>
-   - Оновлено: [profile.md](profile.md)
-   - Оновлено: [index.md](index.md)
-   - Оновлено: [log.md](log.md)
+   - Оновлено: [profile](profile.md)
+   - Оновлено: [index](index.md)
+   - Оновлено: [log](log.md)
    ```
