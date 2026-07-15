@@ -1,0 +1,6 @@
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": "inbox",
+  "attachmentFolderPath": "inbox/",
+  "openBehavior": "file:data/index"
+}
