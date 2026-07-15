@@ -10,6 +10,12 @@ dev = [
     "pre_commit",
     "ruff",
 ]
+
+[project.urls]
+"Homepage" = "https://www.bogdanovych.org"
+"Repository" = "https://github.com/BogdanovychA/mental-health"
+"Bug Tracker" = "https://github.com/BogdanovychA/mental-health/issues"
+
 [tool.ruff]
 line-length = 88
 target-version = "py312"
