@@ -2,5 +2,11 @@
   "newFileLocation": "folder",
   "newFileFolderPath": "inbox",
   "attachmentFolderPath": "inbox/",
-  "openBehavior": "file:data/index"
+  "openBehavior": "file:data/index",
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
 }
