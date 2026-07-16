@@ -27,13 +27,13 @@ def parse_index():
 
     # Extract reports
     reports = []
-    # Format: | [2025/12/22-W52-report-1](./reports/2025/12/22-W52-report-1.md) | 2025-12-22 — 2025-12-28 | +17 | ... |
+    # Format: | [2025/12/22-W52-report-1](./reports/2025/12/22-W52-report-1.md) | `2025-12-22` — `2025-12-28` | +17 | `...` |
     report_matches = re.findall(
-        r'\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([0-9-]{10}\s*[—–-]\s*[0-9-]{10})\s*\|\s*([^|]*)\s*\|\s*([^|]*)\s*\|',
+        r'\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*`?([0-9-]{10})`?\s*[—–-]\s*`?([0-9-]{10})`?\s*\|\s*([^|]*)\s*\|\s*([^|]*)\s*\|',
         content,
     )
     for match in report_matches:
-        score_str = match[3].strip()
+        score_str = match[4].strip()
         try:
             # Strip potential leading plus signs
             if score_str.startswith("+"):
@@ -42,13 +42,18 @@ def parse_index():
         except ValueError:
             score = 0
 
+        # Normalize period to template format with backticks: `YYYY-MM-DD` — `YYYY-MM-DD`
+        period = f"`{match[2]}` — `{match[3]}`"
+        # Strip any surrounding backticks from the summary so it round-trips cleanly
+        summary = match[5].strip().strip("`").strip()
+
         reports.append(
             {
                 "name": match[0].strip(),
                 "path": match[1].strip(),
-                "period": match[2].strip(),
+                "period": period,
                 "score": score,
-                "summary": match[4].strip(),
+                "summary": summary,
             }
         )
 
@@ -167,10 +172,10 @@ def parse_report_file(rel_path):
 
     # Parse period
     period_match = re.search(
-        r'\*\*Період\*\*\s*\|\s*`([0-9-]{10})`\s*[—–-]\s*`([0-9-]{10})`', content
+        r'\*\*Період\*\*\s*\|\s*`?([0-9-]{10})`?\s*[—–-]\s*`?([0-9-]{10})`?', content
     )
     period_str = (
-        f"{period_match.group(1)} — {period_match.group(2)}" if period_match else None
+        f"`{period_match.group(1)}` — `{period_match.group(2)}`" if period_match else None
     )
 
     # Parse score
@@ -179,7 +184,9 @@ def parse_report_file(rel_path):
 
     # Parse short conclusion (summary)
     conclusion_match = re.search(r'\*\*Короткий висновок\*\*\s*\|\s*([^|\n]+)', content)
-    conclusion = conclusion_match.group(1).strip() if conclusion_match else ""
+    conclusion = (
+        conclusion_match.group(1).strip().strip("`").strip() if conclusion_match else ""
+    )
 
     # Parse sources table
     sources = []
@@ -217,8 +224,12 @@ def save_index(raws, reports):
     reports_lines = []
     for r in reports:
         score_str = f"+{r['score']}" if r['score'] > 0 else str(r['score'])
+        # Wrap the conclusion in backticks to match templates/index.md format
+        summary = r["summary"]
+        if not summary.startswith("`"):
+            summary = f"`{summary}`"
         reports_lines.append(
-            f"| [{r['name']}]({r['path']}) | {r['period']} | {score_str} | {r['summary']} |"
+            f"| [{r['name']}]({r['path']}) | {r['period']} | {score_str} | {summary} |"
         )
     reports_table = reports_header + "\n".join(reports_lines) + "\n"
 
