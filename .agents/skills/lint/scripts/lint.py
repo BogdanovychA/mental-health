@@ -29,16 +29,25 @@ def parse_index():
     reports = []
     # Format: | [2025/12/22-W52-report-1](./reports/2025/12/22-W52-report-1.md) | 2025-12-22 — 2025-12-28 | +17 | ... |
     report_matches = re.findall(
-        r'\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([0-9-]{10}\s*[—–-]\s*[0-9-]{10})\s*\|\s*([+-]?\d+)\s*\|\s*([^|]*)\s*\|',
+        r'\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([0-9-]{10}\s*[—–-]\s*[0-9-]{10})\s*\|\s*([^|]*)\s*\|\s*([^|]*)\s*\|',
         content,
     )
     for match in report_matches:
+        score_str = match[3].strip()
+        try:
+            # Strip potential leading plus signs
+            if score_str.startswith("+"):
+                score_str = score_str[1:]
+            score = int(score_str) if score_str else 0
+        except ValueError:
+            score = 0
+
         reports.append(
             {
                 "name": match[0].strip(),
                 "path": match[1].strip(),
                 "period": match[2].strip(),
-                "score": int(match[3]),
+                "score": score,
                 "summary": match[4].strip(),
             }
         )
@@ -47,16 +56,24 @@ def parse_index():
     raws = []
     # Format: | [2025/12/22-inbox-1](./raw/2025/12/22-inbox-1.md) | 2025-12-22 | -3 |
     raw_matches = re.findall(
-        r'\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([0-9-]{10})\s*\|\s*([+-]?\d+)\s*\|',
+        r'\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([0-9-]{10})\s*\|\s*([^|]*)\s*\|',
         content,
     )
     for match in raw_matches:
+        score_str = match[3].strip()
+        try:
+            if score_str.startswith("+"):
+                score_str = score_str[1:]
+            score = int(score_str) if score_str else 0
+        except ValueError:
+            score = 0
+
         raws.append(
             {
                 "name": match[0].strip(),
                 "path": match[1].strip(),
                 "date": match[2].strip(),
-                "score": int(match[3]),
+                "score": score,
             }
         )
 
