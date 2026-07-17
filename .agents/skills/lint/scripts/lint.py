@@ -205,7 +205,11 @@ def parse_report_file(rel_path):
                 link_match = re.search(r'\[([^\]]+)\]\(([^)]+)\)', parts[1])
                 if link_match:
                     sources.append(
-                        {"name": link_match.group(1), "path": link_match.group(2)}
+                        {
+                            "name": link_match.group(1),
+                            "path": link_match.group(2),
+                            "date": parts[2],
+                        }
                     )
 
     return {
@@ -522,6 +526,58 @@ def run_lint(fix=False):
                 tech_errors_unresolved.append(
                     f"Невідповідність балів у звіті '{p}': баланс звіту {data['reported_score']}, але сума джерел {raw_sum}"
                 )
+
+            # Check if all days of the period have source files linked
+            if data["period"]:
+                dates = re.findall(r'[0-9-]{10}', data["period"])
+                if len(dates) == 2:
+                    try:
+                        start_date = datetime.datetime.strptime(
+                            dates[0], "%Y-%m-%d"
+                        ).date()
+                        end_date = datetime.datetime.strptime(
+                            dates[1], "%Y-%m-%d"
+                        ).date()
+
+                        period_dates = []
+                        curr_date = start_date
+                        while curr_date <= end_date:
+                            period_dates.append(curr_date)
+                            curr_date += datetime.timedelta(days=1)
+
+                        source_dates = set()
+                        outside_sources = []
+                        for src in data["sources"]:
+                            src_date_str = src.get("date", "").strip()
+                            if re.match(r'^\d{4}-\d{2}-\d{2}$', src_date_str):
+                                try:
+                                    s_date = datetime.datetime.strptime(
+                                        src_date_str, "%Y-%m-%d"
+                                    ).date()
+                                    source_dates.add(s_date)
+                                    if s_date < start_date or s_date > end_date:
+                                        outside_sources.append(
+                                            f"'{src['name']}' ({src_date_str})"
+                                        )
+                                except ValueError:
+                                    pass
+
+                        if outside_sources:
+                            gaps_warnings.append(
+                                f"У звіті '{p}' знайдено джерела поза звітним періодом: {', '.join(outside_sources)}"
+                            )
+
+                        missing_dates = []
+                        for pd in period_dates:
+                            if pd not in source_dates:
+                                missing_dates.append(pd.strftime("%Y-%m-%d"))
+
+                        if missing_dates:
+                            gaps_warnings.append(
+                                f"У звіті '{p}' відсутні джерела для наступних днів періоду: {', '.join(missing_dates)}"
+                            )
+                    except ValueError:
+                        pass
 
     # Sorting lists chronologically
     # Raw files sorted by date
