@@ -175,7 +175,9 @@ def parse_report_file(rel_path):
         r'\*\*Період\*\*\s*\|\s*`?([0-9-]{10})`?\s*[—–-]\s*`?([0-9-]{10})`?', content
     )
     period_str = (
-        f"`{period_match.group(1)}` — `{period_match.group(2)}`" if period_match else None
+        f"`{period_match.group(1)}` — `{period_match.group(2)}`"
+        if period_match
+        else None
     )
 
     # Parse score
@@ -214,9 +216,31 @@ def parse_report_file(rel_path):
     }
 
 
+def has_data_in_section(content, section_title):
+    pattern = rf'{re.escape(section_title)}\n.*?(?=\n---|\Z)'
+    match = re.search(pattern, content, flags=re.DOTALL)
+    if not match:
+        return False
+    section_content = match.group(0)
+    rows = re.findall(r'\|\s*\[[^\]]+\]\([^)]+\)', section_content)
+    return len(rows) > 0
+
+
 def save_index(raws, reports):
     with open(index_path, "r", encoding="utf-8") as f:
         content = f.read()
+
+    # Safeguard check to prevent accidental data erasure due to parsing issues
+    if not raws and has_data_in_section(content, "## Вхідні матеріали (Raw)"):
+        raise ValueError(
+            "Помилка безпеки: Спроба очистити секцію 'Вхідні матеріали (Raw)', "
+            "хоча оригінальний файл містить записи. Можливо, парсер не зміг зчитати дані через зміну формату."
+        )
+    if not reports and has_data_in_section(content, "## Звіти (Reports)"):
+        raise ValueError(
+            "Помилка безпеки: Спроба очистити секцію 'Звіти (Reports)', "
+            "хоча оригінальний файл містить записи. Можливо, парсер не зміг зчитати дані через зміну формату."
+        )
 
     # We will reconstruct index sections
     # Reports table reconstruction
