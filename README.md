@@ -1,6 +1,14 @@
-# База даних ментального здоров'я
+<p align="center">
+  <img src="assets/logo.svg" alt="Логотип бази даних ментального здоров'я" width="160" />
+</p>
 
-![Made in Ukraine](https://img.shields.io/badge/Made%20in-Ukraine-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCI%2BCjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAwNTdCNyIvPgo8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI0MDAiIHk9IjQwMCIgZmlsbD0iI0ZGRDcwMCIvPgo8L3N2Zz4%3D) ![GitHub License](https://img.shields.io/github/license/BogdanovychA/mental-health?logoColor=grey&color=blue)
+<h1 align="center">База даних ментального здоров'я</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Made%20in-Ukraine-blue?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCI%2BCjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzAwNTdCNyIvPgo8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI0MDAiIHk9IjQwMCIgZmlsbD0iI0ZGRDcwMCIvPgo8L3N2Zz4%3D" alt="Made in Ukraine" />
+  <img src="https://img.shields.io/github/license/BogdanovychA/mental-health?logoColor=grey&color=blue" alt="GitHub License" />
+</p>
+
 
 **База даних ментального здоров'я** — це персональна система для відстеження, структурування та аналізу щоденних активностей і ментального стану користувача за допомогою ШІ-агента.
 
